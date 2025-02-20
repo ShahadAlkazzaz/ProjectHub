@@ -46,5 +46,51 @@ namespace ProjectHubAPI.Controllers
 
             return CreatedAtAction(nameof(GetProject), new { id = project.Id }, project);
         }
+
+        // PUT: api/Projects/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateProject(int id, Project updatedProject)
+        {
+            if (id != updatedProject.Id)
+            {
+                return BadRequest("Projekt-ID matchar inte.");
+            }
+
+            var project = await _context.Projects.FindAsync(id);
+            if (project == null)
+            {
+                return NotFound("Projektet hittades inte.");
+            }
+
+            // Uppdatera fälten (utom ProjectNumber)
+            project.Name = updatedProject.Name;
+            project.StartDate = updatedProject.StartDate;
+            project.EndDate = updatedProject.EndDate;
+            project.Status = updatedProject.Status;
+            project.Customer = updatedProject.Customer;
+            project.ProjectManager = updatedProject.ProjectManager;
+            project.Service = updatedProject.Service;
+            project.TotalPrice = updatedProject.TotalPrice;
+
+            await _context.SaveChangesAsync();
+            return NoContent(); // 204 - OK men inget att returnera
+        }
+
+
+        // DELETE: api/Projects/{id}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProject(int id)
+        {
+            var project = await _context.Projects.FindAsync(id);
+            if (project == null)
+            {
+                return NotFound("Projektet hittades inte.");
+            }
+
+            _context.Projects.Remove(project);
+            await _context.SaveChangesAsync();
+            return NoContent(); // 204 - OK men inget att returnera
+        }
+
     }
 }
