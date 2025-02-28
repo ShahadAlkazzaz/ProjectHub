@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    @apply bg-light-beige text-dark-gray;
+}
+
+.wrapper {
+@apply min-h-screen flex flex-col;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+.container {
+    @apply mx-auto p-6;
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+
+
+@media (min-width: 768px) {
+
+        width: 720px;
+
+}
+
+@media (min-width: 1400px) {
+
+        width: 1320px;
+
+}
+
+@media (min-width: 1920px) {
+
+        width: 1800px;
+
+}}
+
+/* .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+
+/* Navbar text-stil */
+header a {
+    @apply text-lg font-medium transition duration-300;
+}
+
+/* Hover-effekter */
+header a:hover {
+    @apply text-light-pink;
+}
+
+
+/* Inputfält */
+.input-field {
+    @apply w-full px-4 py-2 border border-soft-green rounded-md focus:outline-none focus:ring-2 focus:ring-dark-gray;
+}
+
+/* Knappar */
+.btn {
+    @apply px-5 py-3 rounded-lg font-semibold text-white shadow-md transition duration-300;
+}
+
+.btn-primary {
+    @apply bg-soft-green font-bold hover:bg-dark-gray;
+}
+
+.btn-secondary {
+    @apply bg-light-pink font-bold hover:bg-beige-gray;
+}
+
+.btn-danger {
+    @apply bg-red-500 hover:bg-red-700;
+}
+
+
+
+/* Footer */
+footer {
+    @apply mt-auto;
+}
+
+
+/* Projektkort */
+.project-card {
+    @apply bg-white shadow-lg rounded-lg p-6 border border-gray-200 hover:shadow-xl transition-all duration-300;
+}
+
+form {
+    @apply space-y-4;
+}
