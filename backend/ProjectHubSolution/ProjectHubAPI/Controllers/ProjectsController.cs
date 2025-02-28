@@ -20,8 +20,11 @@ namespace ProjectHubAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
         {
-            return await _context.Projects.ToListAsync();
+            return await _context.Projects
+                                 .Include(p => p.Customer) // 🔹 Inkluderar kunddata
+                                 .ToListAsync();
         }
+
 
         // GET: api/Projects/5
         [HttpGet("{id}")]
@@ -41,11 +44,20 @@ namespace ProjectHubAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Project>> PostProject(Project project)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Generera nästa projektnummer automatiskt
+            project.ProjectNumber = _context.Projects.Any() ? _context.Projects.Max(p => p.ProjectNumber) + 1 : 101;
+
             _context.Projects.Add(project);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetProject), new { id = project.Id }, project);
         }
+
 
         // PUT: api/Projects/{id}
         [HttpPut("{id}")]

@@ -9,6 +9,7 @@ namespace ProjectHubAPI.Data
         {
         }
 
-        public DbSet<Project> Projects { get; set; } 
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Customer> Customers { get; set; }
     }
 }

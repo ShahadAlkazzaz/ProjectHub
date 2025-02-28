@@ -5,7 +5,7 @@
 namespace ProjectHubAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class AddProjectDetails : Migration
+    public partial class UpdateCustomerModel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
